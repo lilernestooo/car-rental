@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VerificationSuccess from "./pages/VerificationSuccess";
 import Cars from "./pages/Cars";
+import HowItWorks from "./pages/HowItWorks";
+import Support from "./pages/Support";
 import Placeholder from "./pages/Placeholder";
 
 export default function App() {
@@ -16,8 +18,8 @@ export default function App() {
 
       {/* Placeholder routes — swap these for real pages as the backend comes online */}
       <Route path="/cars" element={<Cars />} />
-      <Route path="/how-it-works" element={<Placeholder title="How it Works" />} />
-      <Route path="/support" element={<Placeholder title="Support" />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
+      <Route path="/support" element={<Support />} />
       <Route path="/dashboard" element={<Placeholder title="Dashboard" text="Your bookings and account details will show up here." />} />
       <Route path="/forgot-password" element={<Placeholder title="Forgot Password" />} />
       <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
