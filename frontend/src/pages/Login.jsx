@@ -21,7 +21,7 @@ export default function Login() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-page px-6 py-12">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-sm sm:p-10">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-extrabold text-navy">Pampanga Rental</h1>
+          <h1 className="text-3xl font-extrabold text-navy">Transpoza</h1>
           <p className="mt-2 text-muted">Sign in to your account</p>
         </div>
 
@@ -100,7 +100,7 @@ export default function Login() {
         className="mt-6 flex items-center gap-2 text-sm text-muted hover:text-navy"
       >
         <ArrowLeft size={16} />
-        Return to Pampanga Rental Home
+        Return to Transpoza Home
       </Link>
     </div>
   );

@@ -35,7 +35,7 @@ export default function Register() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-page px-6 py-12">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-sm sm:p-10">
         <div className="mb-8 text-center">
-          <h1 className="text-2xl font-semibold text-navy">Pampanga Rental</h1>
+          <h1 className="text-2xl font-semibold text-navy">Transpoza</h1>
           <p className="mt-2 text-muted">Create your account</p>
         </div>
 
