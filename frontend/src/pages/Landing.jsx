@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Map, Wallet } from "lucide-react";
+import { MapPin, Map, Wallet, Headset, ArrowRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import heroImage from "../assets/pampanga-pic.jpg";
@@ -111,22 +111,22 @@ export default function Landing() {
 
       {/* Why book with us */}
       <section className="mx-auto mt-16 max-w-6xl px-6 sm:mt-12">
-        <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-          <div className="rounded-2xl border border-border bg-card p-8">
+        <div className="grid gap-6 sm:grid-cols-3">
+          <div className="rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
             <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white">
               <Map size={20} />
             </div>
             <h3 className="mt-4 text-xl font-semibold text-navy">
               Local San Fernando Experts
             </h3>
-            <p className="mt-2 max-w-md text-muted">
+            <p className="mt-2 text-muted">
               We know Pampanga. Navigate local routes with confidence,
               backed by our extensive knowledge of San Fernando and
               surrounding municipalities.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-8">
+          <div className="rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
             <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white">
               <Wallet size={20} />
             </div>
@@ -136,12 +136,32 @@ export default function Landing() {
               travel. What you see is what you pay.
             </p>
           </div>
+
+          <div className="rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white">
+              <Headset size={20} />
+            </div>
+            <h3 className="mt-4 text-xl font-semibold text-navy">24/7 Support</h3>
+            <p className="mt-2 text-muted">
+              Questions on the road or during booking? Our San Fernando
+              team is a call away, any hour of the day.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Featured vehicles */}
-      <section className="mx-auto mb-24 mt-16 max-w-6xl px-6">
-        <h2 className="mb-6 text-2xl font-bold text-navy">Featured Vehicles</h2>
+  <section className="mx-auto mb-24 mt-16 max-w-6xl px-6">
+  <div className="mb-6 flex items-center justify-between">
+    <h2 className="text-2xl font-bold text-navy">Featured Vehicles</h2>
+    <Link
+      to="/cars"
+      className="flex items-center gap-1.5 text-sm font-semibold text-navy hover:gap-2.5 transition-all"
+    >
+      View All Vehicles
+      <ArrowRight size={16} />
+    </Link>
+  </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {vehicles.map((car) => (
