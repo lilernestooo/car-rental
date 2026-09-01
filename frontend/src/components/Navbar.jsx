@@ -11,7 +11,7 @@ export default function Navbar() {
     <header className="border-b border-border bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="text-lg font-bold text-navy">
-          Pampanga Rental
+          TRANZPOZA.
         </Link>
 
         <nav className="hidden items-center gap-8 sm:flex">
