@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Users, Settings2, Fuel } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -8,9 +9,16 @@ import fortunerImage from "../assets/SUV.jpg";
 const categories = ["All Vehicles", "SUV", "Sedan", "Van", "Pickup"];
 const transmissions = ["Any", "Automatic", "Manual"];
 
+const vehicleTypes = [
+  { key: "car", label: "Cars" },
+  { key: "van", label: "Vans" },
+  { key: "motorcycle", label: "Motorcycles" },
+];
+
 const fleet = [
   {
     name: "Toyota Vios",
+    type: "car",
     category: "Sedan",
     year: "2023 Model",
     seats: "5 Seats",
@@ -21,6 +29,7 @@ const fleet = [
   },
   {
     name: "Toyota Fortuner",
+    type: "car",
     category: "SUV",
     year: "2024 Model",
     seats: "7 Seats",
@@ -31,6 +40,7 @@ const fleet = [
   },
   {
     name: "Toyota Innova",
+    type: "car",
     category: "MPV",
     year: "2023 Model",
     seats: "7 Seats",
@@ -41,6 +51,7 @@ const fleet = [
   },
   {
     name: "Toyota Hiace",
+    type: "van",
     category: "Van",
     year: "2022 Model",
     seats: "15 Seats",
@@ -52,6 +63,9 @@ const fleet = [
 ];
 
 export default function Cars() {
+  const [activeType, setActiveType] = useState("car");
+  const filteredFleet = fleet.filter((car) => car.type === activeType);
+
   return (
     <div className="flex min-h-screen flex-col bg-page">
       <Navbar />
@@ -63,7 +77,24 @@ export default function Cars() {
           Reliable, clean, and ready for your journey.
         </p>
 
+        <div className="mt-6 inline-flex rounded-full border border-border bg-card p-1">
+          {vehicleTypes.map((type) => (
+            <button
+              key={type.key}
+              onClick={() => setActiveType(type.key)}
+              className={`rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
+                activeType === type.key
+                  ? "bg-navy text-white"
+                  : "text-muted hover:text-navy"
+              }`}
+            >
+              {type.label}
+            </button>
+          ))}
+        </div>
+
         <div className="mt-8 grid gap-8 border-t border-border pt-8 lg:grid-cols-[240px_1fr]">
+
           {/* Filters */}
           <aside className="h-fit rounded-2xl border border-border bg-card p-6">
             <h2 className="text-lg font-semibold text-navy">Filters</h2>
@@ -104,7 +135,13 @@ export default function Cars() {
 
           {/* Fleet grid */}
           <div className="grid gap-6 sm:grid-cols-2">
-            {fleet.map((car) => (
+            {filteredFleet.length === 0 && (
+              <p className="col-span-full rounded-2xl border border-dashed border-border bg-card p-10 text-center text-muted">
+                No {vehicleTypes.find((t) => t.key === activeType)?.label.toLowerCase()} available yet — check back soon.
+              </p>
+            )}
+            {filteredFleet.map((car) => (
+                
               <div
                 key={car.name}
                 className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl"

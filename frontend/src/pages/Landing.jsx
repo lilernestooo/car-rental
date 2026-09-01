@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { MapPin, Map, Wallet, Headset, ArrowRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Reveal from "../components/Reveal";
 import heroImage from "../assets/pampanga-pic.jpg";
 import sedanImage from "../assets/sedan.jpg";
 import suvImage from "../assets/SUV.jpg";
@@ -28,6 +29,24 @@ const vehicles = [
     description: "Easy to park, easy on fuel for quick trips around town.",
     price: "₱1,300",
     image: viosImage,
+  },
+];
+
+const perks = [
+  {
+    icon: Map,
+    title: "Local San Fernando Experts",
+    text: "We know Pampanga. Navigate local routes with confidence, backed by our extensive knowledge of San Fernando and surrounding municipalities.",
+  },
+  {
+    icon: Wallet,
+    title: "Simple Pricing",
+    text: "No hidden fees. Transparent daily rates designed for local travel. What you see is what you pay.",
+  },
+  {
+    icon: Headset,
+    title: "24/7 Support",
+    text: "Questions on the road or during booking? Our San Fernando team is a call away, any hour of the day.",
   },
 ];
 
@@ -112,41 +131,17 @@ export default function Landing() {
       {/* Why book with us */}
       <section className="mx-auto mt-16 max-w-6xl px-6 sm:mt-12">
         <div className="grid gap-6 sm:grid-cols-3">
-          <div className="rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white">
-              <Map size={20} />
-            </div>
-            <h3 className="mt-4 text-xl font-semibold text-navy">
-              Local San Fernando Experts
-            </h3>
-            <p className="mt-2 text-muted">
-              We know Pampanga. Navigate local routes with confidence,
-              backed by our extensive knowledge of San Fernando and
-              surrounding municipalities.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white">
-              <Wallet size={20} />
-            </div>
-            <h3 className="mt-4 text-xl font-semibold text-navy">Simple Pricing</h3>
-            <p className="mt-2 text-muted">
-              No hidden fees. Transparent daily rates designed for local
-              travel. What you see is what you pay.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white">
-              <Headset size={20} />
-            </div>
-            <h3 className="mt-4 text-xl font-semibold text-navy">24/7 Support</h3>
-            <p className="mt-2 text-muted">
-              Questions on the road or during booking? Our San Fernando
-              team is a call away, any hour of the day.
-            </p>
-          </div>
+          {perks.map((perk, i) => (
+            <Reveal key={perk.title} delay={i * 120}>
+              <div className="h-full rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy text-white">
+                  <perk.icon size={20} />
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-navy">{perk.title}</h3>
+                <p className="mt-2 text-muted">{perk.text}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
@@ -164,38 +159,37 @@ export default function Landing() {
   </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {vehicles.map((car) => (
-              <div
-                key={car.name}
-                className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl"
-              >
-             <img
-                src={car.image}
-                alt={car.name}
-                className="aspect-video w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
-              />
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold text-navy">{car.name}</h3>
-                  <span className="whitespace-nowrap rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-navy">
-                    {car.badge}
-                  </span>
-                </div>
-                <p className="mt-2 text-sm text-muted">{car.description}</p>
+          {vehicles.map((car, i) => (
+            <Reveal key={car.name} delay={i * 120}>
+              <div className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
+                <img
+                  src={car.image}
+                  alt={car.name}
+                  className="aspect-video w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+                />
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-lg font-semibold text-navy">{car.name}</h3>
+                    <span className="whitespace-nowrap rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-navy">
+                      {car.badge}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-muted">{car.description}</p>
 
-                <div className="mt-5 flex items-center justify-between">
-                  <p className="text-lg font-bold text-navy">
-                    {car.price} <span className="text-sm font-normal text-muted">/day</span>
-                  </p>
-                  <Link
-                    to="/cars"
-                    className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-navy hover:border-navy transition-colors"
-                  >
-                    Select
-                  </Link>
+                  <div className="mt-5 flex items-center justify-between">
+                    <p className="text-lg font-bold text-navy">
+                      {car.price} <span className="text-sm font-normal text-muted">/day</span>
+                    </p>
+                    <Link
+                      to="/cars"
+                      className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-navy hover:border-navy transition-colors"
+                    >
+                      Select
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
