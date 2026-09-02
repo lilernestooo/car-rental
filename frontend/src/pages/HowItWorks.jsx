@@ -68,7 +68,7 @@ export default function HowItWorks() {
 
       {/* Steps */}
       <section className="bg-card px-6 py-16">
-        <div className="mx-auto max-w-3xl">/Z
+        <div className="mx-auto max-w-3xl">
           <div className="relative">
             {/* Connecting vertical line running through every circle */}
             <div className="absolute left-7 top-7 bottom-7 w-px bg-border" />
