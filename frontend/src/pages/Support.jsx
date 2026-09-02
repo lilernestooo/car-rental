@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   AlertTriangle,
+  PhoneCall,
   MapPin,
   Car,
   Headset,
@@ -23,11 +24,13 @@ import "leaflet/dist/leaflet.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-// San Fernando, Pampanga
-const CITY_CENTER = [15.0286, 120.6898];
-const BOUNDARY_RADIUS_METERS = 3000;
-const NORMAL_POSITION = [15.0308, 120.694];
-const BREACHED_POSITION = [15.0525, 120.7155];
+// Approximate geographic center of Pampanga province (not just San Fernando)
+const PROVINCE_CENTER = [15.0794, 120.62];
+// ~25km radius stands in for the whole province boundary in this demo —
+// swap for a real province polygon once you have exact GIS boundary data
+const BOUNDARY_RADIUS_METERS = 25000;
+const NORMAL_POSITION = [15.0308, 120.694]; // San Fernando — within Pampanga
+const BREACHED_POSITION = [15.35, 120.95]; // Well outside the province
 
 function vehicleIcon(breached) {
   const color = breached ? "#dc2626" : "#0f172a";
@@ -70,7 +73,7 @@ function MapControls() {
         <Minus size={16} />
       </button>
       <button
-        onClick={() => map.setView(CITY_CENTER, 13)}
+        onClick={() => map.setView(PROVINCE_CENTER, 10)}
         className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-white text-navy shadow hover:bg-page"
       >
         <LocateFixed size={16} />
@@ -87,11 +90,13 @@ export default function Support() {
   return (
     <div className="flex min-h-screen flex-col bg-page">
       <Navbar />
+      
+      <div className="h-px w-full bg-border" />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
         <h1 className="text-3xl font-extrabold text-navy">Active Rental Tracking</h1>
         <p className="mt-2 text-muted">
-          Monitoring your vehicle&apos;s location within San Fernando, Pampanga.
+          Monitoring your vehicle&apos;s location within Pampanga province.
         </p>
 
         <div className="mt-8 grid items-start gap-6 lg:grid-cols-[1fr_320px]">
@@ -100,14 +105,14 @@ export default function Support() {
             {boundaryBreached && (
               <div className="absolute inset-x-4 top-4 z-[1000] flex items-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white shadow-lg sm:inset-x-8">
                 <AlertTriangle size={18} />
-                Boundary Alert: Vehicle has left San Fernando area!
+                Boundary Alert: Vehicle has left Pampanga province!
               </div>
             )}
 
             <div className="relative aspect-[4/3] w-full sm:aspect-[16/10]">
               <MapContainer
-                center={CITY_CENTER}
-                zoom={13}
+                center={PROVINCE_CENTER}
+                zoom={10}
                 zoomControl={false}
                 scrollWheelZoom={true}
                 className="h-full w-full"
@@ -118,7 +123,7 @@ export default function Support() {
                 />
 
                 <Circle
-                  center={CITY_CENTER}
+                  center={PROVINCE_CENTER}
                   radius={BOUNDARY_RADIUS_METERS}
                   pathOptions={{
                     color: "#0f172a",
@@ -129,7 +134,7 @@ export default function Support() {
                 />
 
                 <Polyline
-                  positions={[CITY_CENTER, vehiclePosition]}
+                  positions={[PROVINCE_CENTER, vehiclePosition]}
                   pathOptions={{ color: routeColor, weight: 3, dashArray: "6 6" }}
                 />
 
@@ -146,6 +151,21 @@ export default function Support() {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {boundaryBreached && (
+              <div className="rounded-2xl border border-red-200 border-l-4 border-l-red-600 bg-red-50 p-5">
+                <div className="flex items-center gap-3">
+                  <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600 text-white">
+                    <PhoneCall size={16} />
+                    <span className="absolute inset-0 animate-ping rounded-full bg-red-500 opacity-60" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-red-700">Warning Call Placed</p>
+                    <p className="text-xs text-red-700/80">Connecting you to support&hellip;</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="rounded-2xl border border-border bg-card p-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-navy">Rental Status</h2>
@@ -178,12 +198,12 @@ export default function Support() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-border bg-card p-6">
-              <h3 className="text-sm font-semibold text-navy">Map Legend</h3>
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <h3 className="text-sm font-semibold text-navy">Map Legend</h3>
               <ul className="mt-4 space-y-3 text-sm text-navy">
                 <li className="flex items-center gap-2">
                   <CircleIcon size={14} className="text-navy" />
-                  Within San Fernando Boundary
+                  Within Pampanga Boundary
                 </li>
                 <li className="flex items-center gap-2">
                   <CircleIcon size={14} className="text-red-600" />
@@ -191,7 +211,7 @@ export default function Support() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-px w-4 bg-navy" />
-                  City Limits
+                  Province Limits
                 </li>
               </ul>
             </div>

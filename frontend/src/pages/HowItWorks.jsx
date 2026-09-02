@@ -51,21 +51,24 @@ export default function HowItWorks() {
   return (
     <div className="flex min-h-screen flex-col bg-page">
       <Navbar />
+      <div className="h-1 w-full bg-black" />
 
       {/* Hero */}
-      <section className="px-6 py-20 text-center">
-        <h1 className="text-4xl font-extrabold text-navy sm:text-5xl">
-          How Pampanga Rental Works
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-muted">
-          Renting a car in San Fernando and Northern Luzon has never been
-          easier. Follow our simple 4-step process to get on the road.
-        </p>
+      <section className="bg-navy px-6 py-20">
+        <div className="mx-auto max-w-2xl text-center sm:mx-0 sm:ml-12 sm:text-left lg:ml-24">
+          <h1 className="text-4xl font-extrabold text-white sm:text-5xl">
+            How Transpoza Works
+          </h1>
+          <p className="mt-4 max-w-xl text-white/70">
+            Renting a car in San Fernando and Northern Luzon has never been
+            easier. Follow our simple 4-step process to get on the road.
+          </p>
+        </div>
       </section>
 
       {/* Steps */}
       <section className="bg-card px-6 py-16">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-3xl">/Z
           <div className="relative">
             {/* Connecting vertical line running through every circle */}
             <div className="absolute left-7 top-7 bottom-7 w-px bg-border" />
@@ -77,7 +80,7 @@ export default function HowItWorks() {
                     {i + 1}
                   </div>
 
-                  <div className="flex-1 rounded-2xl border border-border bg-page p-6">
+                  <div className="flex-1 rounded-2xl border border-border border-l-4 border-l-black bg-page p-6">
                     <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
                       <step.icon size={14} />
                       Step {String(i + 1).padStart(2, "0")}
@@ -105,7 +108,7 @@ export default function HowItWorks() {
       <section className="px-6 py-16">
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.6fr_1fr]">
           <Reveal>
-            <div className="h-full rounded-2xl border border-border bg-card p-8">
+            <div className="h-full rounded-2xl border border-border border-l-4 border-l-black bg-card p-8">
               <div className="flex items-center gap-3">
                 <Shield size={22} className="text-navy" />
                 <h3 className="text-xl font-semibold text-navy">
@@ -122,7 +125,7 @@ export default function HowItWorks() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="h-full rounded-2xl border border-red-200 bg-red-50 p-8">
+            <div className="h-full rounded-2xl border border-red-200 border-l-4 border-l-red-600 bg-red-50 p-8">
               <div className="flex items-center gap-3">
                 <MapPin size={22} className="text-red-600" />
                 <h3 className="text-xl font-semibold text-red-700">
@@ -140,16 +143,16 @@ export default function HowItWorks() {
       </section>
 
       {/* CTA */}
-      <section className="bg-accent-soft/40 px-6 py-20 text-center">
-        <h2 className="text-3xl font-extrabold text-navy sm:text-4xl">
+      <section className="bg-black px-6 py-20 text-center">
+        <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
           Ready to start your journey?
         </h2>
         <Link
           to="/cars"
-          className="mt-8 inline-flex items-center gap-2 rounded-lg bg-navy px-6 py-3 font-semibold text-white hover:bg-navy-hover transition-colors"
+          className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-amber-400 px-6 py-3 font-semibold text-black transition-colors hover:bg-amber-300"
         >
           Browse Fleet
-          <ArrowRight size={18} />
+          <ArrowRight size={18} className="transition-transform duration-300 ease-out group-hover:translate-x-1" />
         </Link>
       </section>
 
