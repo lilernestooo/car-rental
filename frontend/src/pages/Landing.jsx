@@ -54,11 +54,14 @@ const perks = [
 export default function Landing() {
   return (
     <div className="flex min-h-screen flex-col bg-page">
-      <Navbar />
+     <Navbar />
+      <div className="h-1 w-full bg-black" />
 
       {/* Hero */}
-      <section className="relative">
-        <div className="relative h-[520px] w-full overflow-hidden sm:h-[560px]">
+
+      {/* Hero */}
+     <section className="relative">
+  <div className="relative h-[520px] w-full overflow-hidden border-x-2 border-b-2 border-black sm:h-[560px]">
         <img
           src={heroImage}
           alt="Aerial view of San Fernando, Pampanga at dusk"
@@ -80,7 +83,7 @@ export default function Landing() {
 
         {/* Search card — overlaps the hero and the section below */}
         <div className="relative z-10 mx-auto -mt-24 max-w-5xl px-6 sm:-mt-16">
-          <form className="grid gap-4 rounded-2xl border border-border bg-card p-6 shadow-lg sm:grid-cols-[1.1fr_1.2fr_1.2fr_auto] sm:items-end">
+          <form className="grid gap-4 rounded-2xl border-2 border-black bg-card p-6 shadow-lg sm:grid-cols-[1.1fr_1.2fr_1.2fr_auto] sm:items-end">
             <div>
               <label htmlFor="pickupLocation" className="mb-1.5 block text-sm font-medium text-navy">
                 Pick-up Location
@@ -130,7 +133,15 @@ export default function Landing() {
 
       {/* Why book with us */}
       <section className="mx-auto mt-16 max-w-6xl px-6 sm:mt-12">
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl font-bold text-navy sm:text-3xl">Why Book With Us</h2>
+          <p className="mx-auto mt-2 max-w-xl text-muted">
+            Reliable vehicles, honest pricing, and support that actually
+            picks up the phone.
+          </p>
+        </div>
         <div className="grid gap-6 sm:grid-cols-3">
+
           {perks.map((perk, i) => (
             <Reveal key={perk.title} delay={i * 120}>
               <div className="h-full rounded-2xl border border-border bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
@@ -147,11 +158,11 @@ export default function Landing() {
 
       {/* Featured vehicles */}
   <section className="mx-auto mb-24 mt-16 max-w-6xl px-6">
-  <div className="mb-6 flex items-center justify-between">
-    <h2 className="text-2xl font-bold text-navy">Featured Vehicles</h2>
+  <div className="relative mb-10 text-center">
+    <h2 className="text-2xl font-bold text-navy sm:text-3xl">Featured Vehicles</h2>
     <Link
       to="/cars"
-      className="flex items-center gap-1.5 text-sm font-semibold text-navy hover:gap-2.5 transition-all"
+      className="absolute right-0 top-1/2 inline-flex -translate-y-1/2 items-center gap-1.5 text-sm font-semibold text-navy hover:gap-2.5 transition-all"
     >
       View All Vehicles
       <ArrowRight size={16} />
