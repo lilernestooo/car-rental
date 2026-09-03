@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AlertTriangle,
   PhoneCall,
@@ -8,6 +8,8 @@ import {
   Plus,
   Minus,
   LocateFixed,
+  Maximize2,
+  Minimize2,
   Circle as CircleIcon,
 } from "lucide-react";
 import {
@@ -58,6 +60,31 @@ function vehicleIcon(breached) {
 
 function MapControls() {
   const map = useMap();
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const container = map.getContainer();
+
+    const handleFullscreenChange = () => {
+      const active = document.fullscreenElement === container;
+      setIsFullscreen(active);
+      // Leaflet needs to recalculate tile layout after the container resizes
+      setTimeout(() => map.invalidateSize(), 100);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, [map]);
+
+  const toggleFullscreen = () => {
+    const container = map.getContainer();
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      container.requestFullscreen();
+    }
+  };
+
   return (
     <div className="absolute bottom-4 right-4 z-[1000] flex flex-col gap-2">
       <button
@@ -77,6 +104,12 @@ function MapControls() {
         className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-white text-navy shadow hover:bg-page"
       >
         <LocateFixed size={16} />
+      </button>
+      <button
+        onClick={toggleFullscreen}
+        className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-white text-navy shadow hover:bg-page"
+      >
+        {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
       </button>
     </div>
   );

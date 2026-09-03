@@ -80,7 +80,7 @@ export default function HowItWorks() {
                     {i + 1}
                   </div>
 
-                  <div className="flex-1 rounded-2xl border border-border border-l-4 border-l-black bg-page p-6">
+                  <div className="flex-1 rounded-2xl border border-border border-l-4 border-l-black bg-page p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
                     <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
                       <step.icon size={14} />
                       Step {String(i + 1).padStart(2, "0")}
@@ -108,7 +108,7 @@ export default function HowItWorks() {
       <section className="px-6 py-16">
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.6fr_1fr]">
           <Reveal>
-            <div className="h-full rounded-2xl border border-border border-l-4 border-l-black bg-card p-8">
+            <div className="h-full rounded-2xl border border-border border-l-4 border-l-black bg-card p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-navy/30 hover:shadow-xl">
               <div className="flex items-center gap-3">
                 <Shield size={22} className="text-navy" />
                 <h3 className="text-xl font-semibold text-navy">
@@ -125,7 +125,7 @@ export default function HowItWorks() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="h-full rounded-2xl border border-red-200 border-l-4 border-l-red-600 bg-red-50 p-8">
+            <div className="h-full rounded-2xl border border-red-200 border-l-4 border-l-red-600 bg-red-50 p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-red-300 hover:shadow-xl">
               <div className="flex items-center gap-3">
                 <MapPin size={22} className="text-red-600" />
                 <h3 className="text-xl font-semibold text-red-700">
@@ -147,13 +147,13 @@ export default function HowItWorks() {
         <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
           Ready to start your journey?
         </h2>
-        <Link
-          to="/cars"
-          className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-amber-400 px-6 py-3 font-semibold text-black transition-colors hover:bg-amber-300"
-        >
-          Browse Fleet
-          <ArrowRight size={18} className="transition-transform duration-300 ease-out group-hover:translate-x-1" />
-        </Link>
+          <Link
+            to="/cars"
+            className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-navy transition-colors hover:bg-accent-soft"
+          >
+            Browse Fleet
+            <ArrowRight size={18} className="transition-transform duration-300 ease-out group-hover:translate-x-1" />
+          </Link>
       </section>
 
       <Footer />
